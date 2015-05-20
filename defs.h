@@ -3,12 +3,15 @@
 
 typedef unsigned long long u64;
 
-#define     NAME        "VICE 1.0"
-#define     BRD_SQ_NUM  120
+#define     NAME            "VICE 1.0"
+#define     BRD_SQ_NUM      120
+
+#define     MAX_GAME_MOVES  2048
 
 enum { EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK };
 enum { FILE_A, FILE_B,FILE_C,FILE_D,FILE_E,FILE_F,FILE_G,FILE_H, FILE_NONE };
 enum { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8, RANK_NONE };
+
 enum { WHITE, BLACK, BOTH }; 
 
 enum {
@@ -23,5 +26,43 @@ enum {
 };
 
 enum { FALSE, TRUE };
+
+enum { WHITE_KING_CASTLING = 1, WHITE_QUEEN_CASTLING = 2, BLACK_KING_CASTLING = 4, BLACK_QUEEN_CASTLING = 8 }; // Rochade ! 
+
+typedef struct {
+    int move;
+    int castlePermission;
+    int enPas;
+    int fiftyMoveCounter;
+    u64 positionKey;
+
+} Undo;
+
+typedef struct {
+
+    int pieces[BRD_SQ_NUM];
+    u64 pawns[3];
+
+    int kingSquare[2];
+
+    int side;
+    int enPas;
+    int fiftyMoveCounter;
+
+    int ply;
+    int historyPly;
+
+    int castlePermission;
+
+    u64 positionKey;
+
+    int pieceNumber[13];
+    int bigPieces[3];
+    int majorPieces[3];
+    int minorPieces[3];
+
+    Undo history[MAX_GAME_MOVES];
+    
+} Board;
 
 #endif
