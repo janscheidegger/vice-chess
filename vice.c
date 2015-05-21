@@ -1,28 +1,19 @@
 #include "stdio.h"
 #include "defs.h"
+#include "bitboards.h"
 
 int main() {
     allInit();
 
-    int index = 0;
+    u64 playBitBoard = 0ULL;
 
-    for( index = 0 ; index < BRD_SQ_NUM ; ++index )
-    {
-        if(index%10==0) printf("\n");
-        printf("%5d", square120toSquare64[index]);
-    }
+    playBitBoard |= (1ULL << square120toSquare64[D2]);
+    playBitBoard |= (1ULL << square120toSquare64[G2]);
 
-    printf("\n");
-    printf("\n");
+    printf("Start:\n");
+    printBitBoard(playBitBoard);
 
-    for( index = 0 ; index < 64 ; ++index )
-    {
-        if(index %8==0)printf("\n");
-        printf("%5d", square64toSquare120[index]);
-    }
     
-    
-
     return 0;
 }
 
