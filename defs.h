@@ -65,4 +65,16 @@ typedef struct {
     
 } Board;
 
+
+
+/* Globals */
+
+extern int square120toSquare64[BRD_SQ_NUM];
+extern int square64toSquare120[64];
+
+/* Makros */
+#define FILE_RANK_TO_SQAURE(f,r)    ( (21 + (f) ) +  ( (r) * 10 ) )
+
+extern void allInit();
+
 #endif
